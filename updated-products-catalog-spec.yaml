@@ -8,6 +8,13 @@ basePath:
   /
 schemes:
   - https
+securityDefinitions:
+  APIKeyQuery:
+    type: "apiKey"
+    in: "query"
+    name: "apikey"
+security:
+  - APIKeyQuery: []
 consumes:
   - application/json
 produces:
@@ -89,3 +96,5 @@ definitions:
         description: |-
           Categories such as "vintage" or "gardening" that can be used to look up
           other related products.
+
+    

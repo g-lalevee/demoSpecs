@@ -5,7 +5,7 @@ info:
   description: Products API for Hipster Application
 host: x-demo7.lalevee.org
 basePath:
-  /v1/hipster-products-api
+  /hipster-products-api-inwi
 schemes:
   - https
 securityDefinitions:

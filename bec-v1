@@ -5,6 +5,10 @@ info:
   title: JobOffers API
 servers:
 - url: 34-117-0-36.nip.io/v1
+
+security:
+  - ApiKeyAuth: []     
+  
 paths:
   /bec:
     get:
@@ -170,3 +174,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/JobOffer'
+        
+  securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: x-apikey  # name of the header, query parameter or cookie
+
+
+    

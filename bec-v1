@@ -1,0 +1,172 @@
+openapi: 3.0.3
+info:
+  description: API for managing JobOffer resources.
+  version: 0.0.1
+  title: JobOffers API
+servers:
+- url: 34-117-0-36.nip.io/v1
+paths:
+  /bec:
+    get:
+      summary: List 'JobOffer' objects.
+      description: Retrieve a page of 'JobOffer' objects from the server.  Follows
+        the standards for parameters from the [List AIP](  https://aip.dev/132).
+      parameters:
+      - name: pageSize
+        in: query
+        description: Max size of returned list.
+        schema:
+          type: integer
+          default: "25"
+      - name: pageToken
+        in: query
+        description: A page token recieved from the previous list call. Provide this
+          to retrieve the next page.
+        schema:
+          type: string
+      - name: orderBy
+        in: query
+        description: The ordering of the returned list. See the [List Ordering API](
+          https://aip.dev/132) for details on the formatting of this field.
+        schema:
+          type: string
+          default: displayName
+      - name: filter
+        in: query
+        description: Filter that will be used to select JobOffer objects to return.
+          See the [Filtering AIP](https://aip.dev/160) for usage and details on the
+          filtering grammar.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobOffers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListOfJobOffers'
+
+
+components:
+  schemas:
+    JobOffer:
+      title: JobOffer
+      type: object
+      properties:
+        applicationMail:
+          description: The applicationMail of the JobOffer
+          type: string
+          example: mobilite08@groupe-casino.fr
+        applicationUrl:
+          description: The applicationUrl of the JobOffer
+          type: string
+          example: https://mobilite.monoprix.fr/fr/annonce/1082479-chef-de-departement-mode-beaute-fh-76600-le-havre#declareStep1?s_o=CmonGroupe
+        city:
+          description: The city of the JobOffer
+          type: string
+          example: Le Havre
+        contractDuration:
+          description: The contractDuration of the JobOffer
+          type: string
+          example: 0 - 0 mois
+        contractType:
+          description: The contractType of the JobOffer
+          type: string
+          example: CDI
+        contractTypeID:
+          description: The contractTypeID of the JobOffer
+          type: string
+        deletedDateTime:
+          description: The deletedDateTime of the JobOffer
+          type: string
+        department:
+          description: The department of the JobOffer
+          type: string
+          example: Seine-Maritime
+        entity:
+          description: The entity of the JobOffer
+          type: string
+          example: Monoprix
+        entityID:
+          description: The entityID of the JobOffer
+          type: string
+        jobCategory:
+          description: The jobCategory of the JobOffer
+          type: string
+          example: Commerce – Vente
+        jobCategoryId:
+          description: The jobCategoryId of the JobOffer
+          type: string
+        jobDescription:
+          description: The jobDescription of the JobOffer
+          type: string
+          example: |-
+            <div style="text-align:justify;">Véritable garant(e) de nos rayons mode et beauté, devenez le pilier de l’un de nos magasins ! Un métier complet qui demande des qualités d’animateur(trice), de gestionnaire et de manager. Envie d’intégrer une entreprise novatrice et contribuer à réaliser ses ambitions vous motive ? </div>
+
+            <div style="text-align:justify;"><br></div>
+
+            <div style="text-align:justify;">Devenez <b>Chef(fe) de département mode/beauté</b> chez Monoprix, vous incarnerez nos valeurs et notre esprit de proximité. </div>
+
+            <div style="text-align:justify;"><br></div>
+
+            <div style="text-align:justify;">Chez nous, envie de réinventer chaque jour le quotidien avec enthousiasme et rechercher en permanence la satisfaction de nos clients. Intégrez-vous dans un parcours de formation pour appréhender au mieux votre métier.  </div>
+
+            <div style="text-align:justify;"><b><br></b></div>
+
+            <div style="text-align:justify;"><b>Votre sens du commerce compte</b> </div>
+
+            <div style="text-align:justify;"><ul><li>Prenez la responsabilité du périmètre mode et beauté : textile, maisons/loisirs, parfumerie, maquillage.</li><li>Veillez au respect de la politique commerciale du groupe.</li><li>Mettez en place l’ensemble des opérations commerciales : vérification des promos, du catalogue…).</li></ul></div>
+
+            <div style="text-align:justify;"><br></div>
+
+            <div style="text-align:justify;"><b>Vos capacités de gestion seront appréciées</b></div>
+
+            <div style="text-align:justify;"><ul><li>Suivez votre budget.</li><li>Mettez en place des plans d’actions correctifs pour améliorer les performances du magasin.</li><li>Développez le chiffre d’affaires de vos rayons.</li></ul><br></div>
+
+            <div style="text-align:justify;"><b>Mettez en action vos qualités de manager réactif(ve) et à l’écoute</b>  </div>
+
+            <div style="text-align:justify;"><ul><li>Managez, formez et montez en compétences une équipe d’environ 20 collaborateurs.</li></ul></div>
+        jobTitle:
+          description: The jobTitle of the JobOffer
+          type: string
+          example: Chef de département mode beauté F/H
+        lastModifiedDateTime:
+          description: The lastModifiedDateTime of the JobOffer
+          type: string
+          example: 19/11/2020 00:00:00
+        offerID:
+          description: The offerID of the JobOffer
+          type: string
+        offerReference:
+          description: The offerReference of the JobOffer
+          type: string
+          example: GDLA545
+        publishingStartDate:
+          description: The publishingStartDate of the JobOffer
+          type: string
+          example: 19/11/2020 00:00:00
+        region:
+          description: The region of the JobOffer
+          type: string
+          example: Normandie
+        requestedProfile:
+          description: The requestedProfile of the JobOffer
+          type: string
+          example: |-
+            <div style="text-align:justify;">Vous avez une expérience de 4 à 7 ans dans le secteur de la distribution et notamment sur le secteur non alimentaire. Vous avez déjà travaillé avec une équipe d'une vingtaine de collaborateurs. </div>
+
+            <div style="text-align:justify;">Enfin, vous placez le client au cœur de vos priorités au quotidien et aimez les challenges.</div>
+
+            <div style="text-align:justify;"><br></div>
+
+            <div style="text-align:justify;"><b>Véritable manager ? Postulez !</b><br></div>
+    ListOfJobOffers:
+      title: List of JobOffer objects
+      type: array
+      items:
+        $ref: '#/components/schemas/JobOffer'

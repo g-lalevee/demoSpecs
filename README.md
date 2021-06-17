@@ -1,1 +1,1 @@
-# myHipster
+# Specs for demos

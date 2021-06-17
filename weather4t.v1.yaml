@@ -27,8 +27,8 @@ produces:
 securityDefinitions:
   api_key:
     type: apiKey
-    name: apiKey
-    in: query
+    name: x-apiKey
+    in: header
 security:
   - api_key: []
 parameters:

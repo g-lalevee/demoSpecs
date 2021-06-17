@@ -1,0 +1,339 @@
+swagger: '2.0'
+info:
+  version: '3.0'
+  title: Currents on Demand
+  description: >-
+    The Weather Current Conditions are generated on demand from The Weather
+    Company (TWC) Currents On Demand (COD) system.  The COD data feed returns a
+    similar set of data elements as traditional site-based observations. The API
+    provides information on temperature, precipitation, wind, barometric
+    pressure, visibility, ultraviolet (UV) radiation, and other related weather
+    observations elements as well as date/time, weather icon codes and phrases.
+    The COD is gridded across the globe at a 4KM geocode resolution.
+  license:
+    name: >-
+      This product includes software originally developed by IBM Corporation,
+      Copyright 2018 IBM Corp.
+    url: 'http://www-03.ibm.com/software/sla/sladb.nsf/sla/sd-7492-08'
+externalDocs:
+  url: >-
+   https://weather.com/swagger-docs/call-for-code
+host: 34.117.38.184.nip.io
+schemes:
+  - https
+basePath: /v2
+produces:
+  - application/json
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: x-apiKey
+    in: header
+security:
+  - api_key: []
+parameters:
+  geocode:
+    name: city
+    in: query
+    description: >-
+      A valid city name. For example, mauguio,fr.
+    required: true
+    type: string
+    default: 'mauguio,fr'
+paths:
+  /weather:
+    get:
+      operationId: getSunV3CurrentObservations
+      description: Request current conditions
+      parameters:
+        - $ref: '#/parameters/geocode'
+      responses:
+        '200':
+          $ref: '#/responses/OKRequest'
+responses:
+  OKRequest:
+    description: OK. The request has succeeded
+    schema:
+      $ref: '#/definitions/successSchema'
+definitions:
+  successSchema:
+    type: object
+    required:
+      - cloudCeiling
+      - cloudCoverPhrase
+      - dayOfWeek
+      - dayOrNight
+      - expirationTimeUtc
+      - iconCode
+      - iconCodeExtend
+      - obsQualifierCode
+      - obsQualifierSeverity
+      - precip1Hour
+      - precip6Hour
+      - precip24Hour
+      - pressureAltimeter
+      - pressureChange
+      - pressureMeanSeaLevel
+      - pressureTendencyCode
+      - pressureTendencyTrend
+      - relativeHumidity
+      - snow1Hour
+      - snow6Hour
+      - snow24Hour
+      - sunriseTimeLocal
+      - sunriseTimeUtc
+      - sunsetTimeLocal
+      - sunsetTimeUtc
+      - temperature
+      - temperatureChange24Hour
+      - temperatureDewPoint
+      - temperatureFeelsLike
+      - temperatureHeatIndex
+      - temperatureMax24Hour
+      - temperatureMaxSince7Am
+      - temperatureMin24Hour
+      - temperatureWindChill
+      - uvDescription
+      - uvIndex
+      - validTimeLocal
+      - validTimeUtc
+      - visibility
+      - windDirection
+      - windDirectionCardinal
+      - windGust
+      - windSpeed
+      - wxPhraseLong
+      - wxPhraseMedium
+      - wxPhraseShort
+    properties:
+      cloudCeiling:
+        description: cloudCeiling
+        type: string
+        example: null
+      cloudCoverPhrase:
+        description: cloudCoverPhrase
+        type: string
+        example: Partly Cloudy
+      dayOfWeek:
+        description: dayOfWeek
+        type: string
+        example: Tuesday
+      dayOrNight:
+        description: dayOrNight
+        type: string
+        example: D
+      expirationTimeUtc:
+        description: expirationTimeUtc
+        type: number
+        example: 1543944567
+      iconCode:
+        description: iconCode
+        type: number
+        example: 34
+      iconCodeExtend:
+        description: iconCodeExtend
+        type: number
+        example: 3400
+      obsQualifierCode:
+        description: obsQualifierCode
+        type: string
+        example: null
+      obsQualifierSeverity:
+        description: obsQualifierSeverity
+        type: string
+        example: null
+      precip1Hour:
+        description: precip1Hour
+        type: number
+        example: 0
+      precip6Hour:
+        description: precip6Hour
+        type: number
+        example: 0
+      precip24Hour:
+        description: precip24Hour
+        type: number
+        example: 0
+      pressureAltimeter:
+        description: pressureAltimeter
+        type: number
+        example: 30.15
+      pressureChange:
+        description: pressureChange
+        type: number
+        example: -0.02
+      pressureMeanSeaLevel:
+        description: pressureMeanSeaLevel
+        type: number
+        example: 1019.7
+      pressureTendencyCode:
+        description: pressureTendencyCode
+        type: number
+        example: 2
+      pressureTendencyTrend:
+        description: pressureTendencyTrend
+        type: string
+        example: Falling
+      relativeHumidity:
+        description: relativeHumidity
+        type: number
+        example: 54
+      snow1Hour:
+        description: snow1Hour
+        type: number
+        example: 0
+      snow6Hour:
+        description: snow6Hour
+        type: number
+        example: 0
+      snow24Hour:
+        description: snow24Hour
+        type: number
+        example: 0
+      sunriseTimeLocal:
+        description: sunriseTimeLocal
+        type: string
+        example: '2018-12-04T07:26:26-0500'
+      sunriseTimeUtc:
+        description: sunriseTimeUtc
+        type: number
+        example: 1543926386
+      sunsetTimeLocal:
+        description: sunsetTimeLocal
+        type: string
+        example: '2018-12-04T17:28:54-0500'
+      sunsetTimeUtc:
+        description: sunsetTimeUtc
+        type: number
+        example: 1543962534
+      temperature:
+        description: temperature
+        type: number
+        example: 46
+      temperatureChange24Hour:
+        description: temperatureChange24Hour
+        type: number
+        example: -15
+      temperatureDewPoint:
+        description: temperatureDewPoint
+        type: number
+        example: 31
+      temperatureFeelsLike:
+        description: temperatureFeelsLike
+        type: number
+        example: 41
+      temperatureHeatIndex:
+        description: temperatureHeatIndex
+        type: number
+        example: 46
+      temperatureMax24Hour:
+        description: temperatureMax24Hour
+        type: number
+        example: 65
+      temperatureMaxSince7Am:
+        description: temperatureMaxSince7Am
+        type: number
+        example: 46
+      temperatureMin24Hour:
+        description: temperatureMin24Hour
+        type: number
+        example: 39
+      temperatureWindChill:
+        description: temperatureWindChill
+        type: number
+        example: 41
+      uvDescription:
+        description: uvDescription
+        type: string
+        example: Moderate
+      uvIndex:
+        description: uvIndex
+        type: number
+        example: 3
+      validTimeLocal:
+        description: validTimeLocal
+        type: string
+        example: '2018-12-04T12:19:27-0500'
+      validTimeUtc:
+        description: validTimeUtc
+        type: number
+        example: 1543943967
+      visibility:
+        description: visibility
+        type: number
+        example: 10
+      windDirection:
+        description: windDirection
+        type: number
+        example: 310
+      windDirectionCardinal:
+        description: windDirectionCardinal
+        type: string
+        example: NW
+      windGust:
+        description: windGust
+        type: string
+        example: null
+      windSpeed:
+        description: nuwindSpeedll
+        type: number
+        example: 11
+      wxPhraseLong:
+        description: wxPhraseLong
+        type: string
+        example: Fair
+      wxPhraseMedium:
+        description: wxPhraseMedium
+        type: string
+        example: Fair
+      wxPhraseShort:
+        description: wxPhraseShort
+        type: string
+        example: Fair
+    example:
+      cloudCeiling: null
+      cloudCoverPhrase: Partly Cloudy
+      dayOfWeek: Tuesday
+      dayOrNight: D
+      expirationTimeUtc: 1543944567
+      iconCode: 34
+      iconCodeExtend: 3400
+      obsQualifierCode: null
+      obsQualifierSeverity: null
+      precip1Hour: 0
+      precip6Hour: 0
+      precip24Hour: 0
+      pressureAltimeter: 30.15
+      pressureChange: -0.02
+      pressureMeanSeaLevel: 1019.7
+      pressureTendencyCode: 2
+      pressureTendencyTrend: Falling
+      relativeHumidity: 54
+      snow1Hour: 0
+      snow6Hour: 0
+      snow24Hour: 0
+      sunriseTimeLocal: '2018-12-04T07:26:26-0500'
+      sunriseTimeUtc: 1543926386
+      sunsetTimeLocal: '2018-12-04T17:28:54-0500'
+      sunsetTimeUtc: 1543962534
+      temperature: 46
+      temperatureChange24Hour: -15
+      temperatureDewPoint: 31
+      temperatureFeelsLike: 41
+      temperatureHeatIndex: 46
+      temperatureMax24Hour: 65
+      temperatureMaxSince7Am: 46
+      temperatureMin24Hour: 39
+      temperatureWindChill: 41
+      uvDescription: Moderate
+      uvIndex: 3
+      validTimeLocal: '2018-12-04T12:19:27-0500'
+      validTimeUtc: 1543943967
+      visibility: 10
+      windDirection: 310
+      windDirectionCardinal: NW
+      windGust: null
+      windSpeed: 11
+      wxPhraseLong: Fair
+      wxPhraseMedium: Fair
+      wxPhraseShort: Fair

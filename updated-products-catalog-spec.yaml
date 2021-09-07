@@ -3,9 +3,9 @@ info:
   title: Hipster Products API
   version: "1"
   description: Products API for Hipster Application
-host: bap-emea-apigee-5-dev.lalevee.org
+host: 34.117.38.184.nip.io
 basePath:
-  /v1/hipster-products
+  /v1/hipster-products-brittany
 schemes:
   - https
 securityDefinitions:

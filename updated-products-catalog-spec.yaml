@@ -5,7 +5,7 @@ info:
   description: Products API for Hipster Application
 host: 34.117.38.184.nip.io
 basePath:
-  /v1/hipster-products-brittany
+  /v1/hipster-products
 schemes:
   - https
 securityDefinitions:

@@ -6,6 +6,9 @@ info:
   contact:
     name: Apigee Devrel
     url: https://github.com/apigee/devrel
+    
+  x-data-classification: publicaopenadata
+  x-lifecycle: develop
 
 servers:
   -  url: https://34.117.38.184.nip.io/api2

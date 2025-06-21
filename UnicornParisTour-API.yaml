@@ -1,0 +1,193 @@
+openapi: 3.0.0
+info:
+  title: UnicornParisTour API
+  description: An API for a Paris tour guide app tailored for unicorns
+  version: 1.0.0
+servers:
+  - url: https://34.117.38.184.nip.io/unicornparistour-api
+
+
+paths:
+  /landmarks:
+    get:
+      summary: Retrieve a list of Paris landmarks with special significance for unicorns
+      parameters:
+        - name: category
+          in: query
+          description: Filter landmarks by category (e.g., "blacksmith", "magical", "treats")
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Limit the number of results returned
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of landmarks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  landmarks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Landmark'
+  /landmarks/{id}:
+    get:
+      summary: Retrieve detailed information about a specific landmark
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the landmark to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about a landmark
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  landmark:
+                    $ref: '#/components/schemas/LandmarkDetail'
+  /events:
+    get:
+      summary: Retrieve a list of upcoming events in Paris that might be of interest to unicorns
+      parameters:
+        - name: date_range
+          in: query
+          description: Filter events by a specific date range (e.g., "2024-10-01,2024-10-31")
+          schema:
+            type: string
+        - name: category
+          in: query
+          description: Filter events by category (e.g., "festival", "market", "workshop")
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of events
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+  /user/profile:
+    post:
+      summary: Create or update a user profile for a unicorn
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+      responses:
+        '201':
+          description: Profile created or updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profile_id:
+                    type: string
+                    description: ID of the created/updated profile
+  /user/profile/{id}:
+    get:
+      summary: Retrieve a unicorn's saved profile
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the profile to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A unicorn's saved profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+
+
+components:
+  schemas:
+    Landmark:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+              format: float
+            longitude:
+              type: number
+              format: float
+        image_url:
+          type: string
+          format: uri
+    LandmarkDetail:
+      allOf:
+        - $ref: '#/components/schemas/Landmark'
+        - type: object
+          properties:
+            history:
+              type: string
+            tips:
+              type: string
+            nearby_landmarks:
+              type: array
+              items:
+                type: string
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        date_time:
+          type: object
+          properties:
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+        image_url:
+          type: string
+          format: uri
+    Profile:
+      type: object
+      properties:
+        unicorn_name:
+          type: string
+        favorite_landmarks:
+          type: array
+          items:
+            type: string
+        favorite_events:
+          type: array
+          items:
+            type: string

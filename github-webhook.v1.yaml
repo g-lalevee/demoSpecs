@@ -1,0 +1,551 @@
+openapi: 3.0.0
+info:
+  title: webhook
+  description: Expose Webhook to GitHub
+  contact:
+    name: C. Lalevée
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0-oas3
+servers:
+- url: https://34.117.38.184.nip.io/v1/
+tags:
+- name: github
+  description: GitHub webhook
+paths:
+  /webhook:
+    post:
+      tags:
+      - github
+      description: Receive GitHub event
+      operationId: Webhook
+      parameters:
+      - name: x-hub-signature-256
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: sha256=dcc7bf24249607f051122d1c913b899a78ee2e28f5462efc2c8b3001420ee73c
+      - name: x-github-event
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: push
+      - name: x-github-hook-id
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: 987kjhjkh9898
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GitHubEvent'
+        required: true
+      responses:
+        "200":
+          description: Successfully received.
+components:
+  schemas:
+    GitHubEvent:
+      title: GitHub Event
+      type: object
+      properties:
+        ref:
+          type: string
+        before:
+          type: string
+        after:
+          type: string
+        repository:
+          $ref: '#/components/schemas/GitHubEvent_repository'
+        pusher:
+          $ref: '#/components/schemas/GitHubEvent_pusher'
+        sender:
+          $ref: '#/components/schemas/GitHubEvent_sender'
+        created:
+          type: boolean
+        deleted:
+          type: boolean
+        forced:
+          type: boolean
+        base_ref: {}
+        compare:
+          type: string
+        commits:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitHubEvent_commits'
+        head_commit:
+          $ref: '#/components/schemas/GitHubEvent_commits'
+      example:
+        ref: refs/heads/main
+        before: 77761fb1bd041d95b43a0d5d9d621fb86dbb28a7
+        after: c15bcde8a1bec724c1c2a96c4799c74657b7a058
+        repository:
+          id: 469198453
+          node_id: R_kgDOG_dmdQ
+          name: apigee-cicd
+          full_name: xx/apigee-cicd
+          private: false
+          owner:
+            name: xx
+            email: 46923423+xx@users.noreply.github.com
+            login: xx
+            id: 46923423
+            node_id: MDQ6VXNlcjQ2OTIzNDIz
+            avatar_url: https://avatars.githubusercontent.com/u/46923423?v=4
+            gravatar_id: ""
+            url: https://api.github.com/users/xx
+            html_url: https://github.com/xx
+            followers_url: https://api.github.com/users/xx/followers
+            following_url: "https://api.github.com/users/xx/following{/other_user}"
+            gists_url: "https://api.github.com/users/xx/gists{/gist_id}"
+            starred_url: "https://api.github.com/users/xx/starred{/owner}{/repo}"
+            subscriptions_url: https://api.github.com/users/xx/subscriptions
+            organizations_url: https://api.github.com/users/xx/orgs
+            repos_url: https://api.github.com/users/xx/repos
+            events_url: "https://api.github.com/users/xx/events{/privacy}"
+            received_events_url: https://api.github.com/users/xx/received_events
+            type: User
+            site_admin: false
+          html_url: https://github.com/xx/apigee-cicd
+          description: Apigee CICD assets
+          fork: false
+          url: https://github.com/xx/apigee-cicd
+          forks_url: https://api.github.com/repos/xx/apigee-cicd/forks
+          keys_url: "https://api.github.com/repos/xx/apigee-cicd/keys{/key_id}"
+          collaborators_url: "https://api.github.com/repos/xx/apigee-cicd/collaborators{/collaborator}"
+          teams_url: https://api.github.com/repos/xx/apigee-cicd/teams
+          hooks_url: https://api.github.com/repos/xx/apigee-cicd/hooks
+          issue_events_url: "https://api.github.com/repos/xx/apigee-cicd/issues/events{/number}"
+          events_url: https://api.github.com/repos/xx/apigee-cicd/events
+          assignees_url: "https://api.github.com/repos/xx/apigee-cicd/assignees{/user}"
+          branches_url: "https://api.github.com/repos/xx/apigee-cicd/branches{/branch}"
+          tags_url: https://api.github.com/repos/xx/apigee-cicd/tags
+          blobs_url: "https://api.github.com/repos/xx/apigee-cicd/git/blobs{/sha}"
+          git_tags_url: "https://api.github.com/repos/xx/apigee-cicd/git/tags{/sha}"
+          git_refs_url: "https://api.github.com/repos/xx/apigee-cicd/git/refs{/sha}"
+          trees_url: "https://api.github.com/repos/xx/apigee-cicd/git/trees{/sha}"
+          statuses_url: "https://api.github.com/repos/xx/apigee-cicd/statuses/{sha}"
+          languages_url: https://api.github.com/repos/xx/apigee-cicd/languages
+          stargazers_url: https://api.github.com/repos/xx/apigee-cicd/stargazers
+          contributors_url: https://api.github.com/repos/xx/apigee-cicd/contributors
+          subscribers_url: https://api.github.com/repos/xx/apigee-cicd/subscribers
+          subscription_url: https://api.github.com/repos/xx/apigee-cicd/subscription
+          commits_url: "https://api.github.com/repos/xx/apigee-cicd/commits{/sha}"
+          git_commits_url: "https://api.github.com/repos/xx/apigee-cicd/git/commits{/sha}"
+          comments_url: "https://api.github.com/repos/xx/apigee-cicd/comments{/number}"
+          issue_comment_url: "https://api.github.com/repos/xx/apigee-cicd/issues/comments{/number}"
+          contents_url: "https://api.github.com/repos/xx/apigee-cicd/contents/{+path}"
+          compare_url: "https://api.github.com/repos/xx/apigee-cicd/compare/{base}...{head}"
+          merges_url: https://api.github.com/repos/xx/apigee-cicd/merges
+          archive_url: "https://api.github.com/repos/xx/apigee-cicd/{archive_format}{/ref}"
+          downloads_url: https://api.github.com/repos/xx/apigee-cicd/downloads
+          issues_url: "https://api.github.com/repos/xx/apigee-cicd/issues{/number}"
+          pulls_url: "https://api.github.com/repos/xx/apigee-cicd/pulls{/number}"
+          milestones_url: "https://api.github.com/repos/xx/apigee-cicd/milestones{/number}"
+          notifications_url: "https://api.github.com/repos/xx/apigee-cicd/notifications{?since,all,participating}"
+          labels_url: "https://api.github.com/repos/xx/apigee-cicd/labels{/name}"
+          releases_url: "https://api.github.com/repos/xx/apigee-cicd/releases{/id}"
+          deployments_url: https://api.github.com/repos/xx/apigee-cicd/deployments
+          created_at: 1647118606
+          updated_at: 2024-10-11T13:34:03Z
+          pushed_at: 1728653655
+          git_url: git://github.com/xx/apigee-cicd.git
+          ssh_url: git@github.com:xx/apigee-cicd.git
+          clone_url: https://github.com/xx/apigee-cicd.git
+          svn_url: https://github.com/xx/apigee-cicd
+          size: 48
+          stargazers_count: 13
+          watchers_count: 13
+          has_issues: true
+          has_projects: true
+          has_downloads: true
+          has_wiki: true
+          has_pages: false
+          has_discussions: false
+          forks_count: 0
+          archived: false
+          disabled: false
+          open_issues_count: 0
+          allow_forking: true
+          is_template: false
+          web_commit_signoff_required: false
+          topics: []
+          visibility: public
+          forks: 0
+          open_issues: 0
+          watchers: 13
+          default_branch: main
+          stargazers: 13
+          master_branch: main
+        pusher:
+          name: xx
+          email: 46923423+xx@users.noreply.github.com
+        sender:
+          login: xx
+          id: 46923423
+          node_id: MDQ6VXNlcjQ2OTIzNDIz
+          avatar_url: https://avatars.githubusercontent.com/u/46923423?v=4
+          gravatar_id: ""
+          url: https://api.github.com/users/xx
+          html_url: https://github.com/xx
+          followers_url: https://api.github.com/users/xx/followers
+          following_url: "https://api.github.com/users/xx/following{/other_user}"
+          gists_url: "https://api.github.com/users/xx/gists{/gist_id}"
+          starred_url: "https://api.github.com/users/xx/starred{/owner}{/repo}"
+          subscriptions_url: https://api.github.com/users/xx/subscriptions
+          organizations_url: https://api.github.com/users/xx/orgs
+          repos_url: https://api.github.com/users/xx/repos
+          events_url: "https://api.github.com/users/xx/events{/privacy}"
+          received_events_url: https://api.github.com/users/xx/received_events
+          type: User
+          site_admin: false
+        created: false
+        deleted: false
+        forced: false
+        compare: https://github.com/xx/apigee-cicd/compare/77761fb1bd04...c15bcde8a1be
+        commits:
+        - id: c15bcde8a1bec724c1c2a96c4799c74657b7a058
+          tree_id: d746d08a903c56b4a8b371ee160ad3cc5d57b4e9
+          distinct: true
+          message: Update README.md
+          timestamp: 2024-10-11T15:34:15+02:00
+          url: https://github.com/xx/apigee-cicd/commit/c15bcde8a1bec724c1c2a96c4799c74657b7a058
+          author:
+            name: xxxxx
+            email: xxxxx@users.noreply.github.com
+            username: xx
+          committer:
+            name: GitHub
+            email: noreply@github.com
+            username: web-flow
+          added: []
+          removed: []
+          modified:
+          - README.md
+        head_commit:
+          id: c15bcde8a1bec724c1c2a96c4799c74657b7a058
+          tree_id: d746d08a903c56b4a8b371ee160ad3cc5d57b4e9
+          distinct: true
+          message: Update README.md
+          timestamp: 2024-10-11T15:34:15+02:00
+          url: https://github.com/xx/apigee-cicd/commit/c15bcde8a1bec724c1c2a96c4799c74657b7a058
+          author:
+            name: Christophe Lalevee
+            email: 46923423+xx@users.noreply.github.com
+            username: xx
+          committer:
+            name: GitHub
+            email: noreply@github.com
+            username: web-flow
+          added: []
+          removed: []
+          modified:
+          - README.md
+    GitHubEvent_repository_owner:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        login:
+          type: string
+        id:
+          type: number
+        node_id:
+          type: string
+        avatar_url:
+          type: string
+        gravatar_id:
+          type: string
+        url:
+          type: string
+        html_url:
+          type: string
+        followers_url:
+          type: string
+        following_url:
+          type: string
+        gists_url:
+          type: string
+        starred_url:
+          type: string
+        subscriptions_url:
+          type: string
+        organizations_url:
+          type: string
+        repos_url:
+          type: string
+        events_url:
+          type: string
+        received_events_url:
+          type: string
+        type:
+          type: string
+        site_admin:
+          type: boolean
+    GitHubEvent_repository:
+      type: object
+      properties:
+        id:
+          type: number
+        node_id:
+          type: string
+        name:
+          type: string
+        full_name:
+          type: string
+        private:
+          type: boolean
+        owner:
+          $ref: '#/components/schemas/GitHubEvent_repository_owner'
+        html_url:
+          type: string
+        description:
+          type: string
+        fork:
+          type: boolean
+        url:
+          type: string
+        forks_url:
+          type: string
+        keys_url:
+          type: string
+        collaborators_url:
+          type: string
+        teams_url:
+          type: string
+        hooks_url:
+          type: string
+        issue_events_url:
+          type: string
+        events_url:
+          type: string
+        assignees_url:
+          type: string
+        branches_url:
+          type: string
+        tags_url:
+          type: string
+        blobs_url:
+          type: string
+        git_tags_url:
+          type: string
+        git_refs_url:
+          type: string
+        trees_url:
+          type: string
+        statuses_url:
+          type: string
+        languages_url:
+          type: string
+        stargazers_url:
+          type: string
+        contributors_url:
+          type: string
+        subscribers_url:
+          type: string
+        subscription_url:
+          type: string
+        commits_url:
+          type: string
+        git_commits_url:
+          type: string
+        comments_url:
+          type: string
+        issue_comment_url:
+          type: string
+        contents_url:
+          type: string
+        compare_url:
+          type: string
+        merges_url:
+          type: string
+        archive_url:
+          type: string
+        downloads_url:
+          type: string
+        issues_url:
+          type: string
+        pulls_url:
+          type: string
+        milestones_url:
+          type: string
+        notifications_url:
+          type: string
+        labels_url:
+          type: string
+        releases_url:
+          type: string
+        deployments_url:
+          type: string
+        created_at:
+          type: number
+        updated_at:
+          type: string
+        pushed_at:
+          type: number
+        git_url:
+          type: string
+        ssh_url:
+          type: string
+        clone_url:
+          type: string
+        svn_url:
+          type: string
+        homepage: {}
+        size:
+          type: number
+        stargazers_count:
+          type: number
+        watchers_count:
+          type: number
+        language: {}
+        has_issues:
+          type: boolean
+        has_projects:
+          type: boolean
+        has_downloads:
+          type: boolean
+        has_wiki:
+          type: boolean
+        has_pages:
+          type: boolean
+        has_discussions:
+          type: boolean
+        forks_count:
+          type: number
+        mirror_url: {}
+        archived:
+          type: boolean
+        disabled:
+          type: boolean
+        open_issues_count:
+          type: number
+        license: {}
+        allow_forking:
+          type: boolean
+        is_template:
+          type: boolean
+        web_commit_signoff_required:
+          type: boolean
+        topics:
+          type: array
+          items: {}
+        visibility:
+          type: string
+        forks:
+          type: number
+        open_issues:
+          type: number
+        watchers:
+          type: number
+        default_branch:
+          type: string
+        stargazers:
+          type: number
+        master_branch:
+          type: string
+    GitHubEvent_pusher:
+      required:
+      - email
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+    GitHubEvent_sender:
+      type: object
+      properties:
+        login:
+          type: string
+        id:
+          type: number
+        node_id:
+          type: string
+        avatar_url:
+          type: string
+        gravatar_id:
+          type: string
+        url:
+          type: string
+        html_url:
+          type: string
+        followers_url:
+          type: string
+        following_url:
+          type: string
+        gists_url:
+          type: string
+        starred_url:
+          type: string
+        subscriptions_url:
+          type: string
+        organizations_url:
+          type: string
+        repos_url:
+          type: string
+        events_url:
+          type: string
+        received_events_url:
+          type: string
+        type:
+          type: string
+        site_admin:
+          type: boolean
+    GitHubEvent_author:
+      required:
+      - email
+      - name
+      - username
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+    GitHubEvent_commits:
+      type: object
+      properties:
+        id:
+          type: string
+        tree_id:
+          type: string
+        distinct:
+          type: boolean
+        message:
+          type: string
+        timestamp:
+          type: string
+        url:
+          type: string
+        author:
+          $ref: '#/components/schemas/GitHubEvent_author'
+        committer:
+          $ref: '#/components/schemas/GitHubEvent_author'
+        added:
+          type: array
+          items: {}
+        removed:
+          type: array
+          items: {}
+        modified:
+          type: array
+          items:
+            type: string

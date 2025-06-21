@@ -1,0 +1,244 @@
+---
+swagger: "2.0"
+info:
+  description: Get Cereal yield (kg per hectare) per country, since 1960
+  version: 1.0.0
+  title: Cereal yield API
+  contact:
+    email: lalevee@google.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: 34.117.38.184.nip.io
+basePath: /cereal/v2
+tags:
+- name: Cereal
+  description: Operations available to regular developers
+schemes:
+- https
+produces:
+- application/json
+security:
+- api_key: []
+paths:
+  /yield:
+    get:
+      tags:
+      - Cereal
+      summary: filtered list of country
+      description: |
+        By passing in the appropriate filtering options, you can list existing country cereal yield
+      operationId: listCerealYield
+      produces:
+      - application/json
+      parameters:
+      - name: countryID
+        in: query
+        description: Country Code of Cereal Yield to be return
+        required: false
+        type: string
+        default: FRA
+      responses:
+        "200":
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CerealYield'
+        "400":
+          description: bad input parameter
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: x-apikey
+    in: header
+definitions:
+  CerealYield:
+    type: object
+    properties:
+      country_code:
+        type: string
+        example: FRA
+      country_name:
+        type: string
+        example: France
+      _1961:
+        type: number
+        example: 2275.9
+      _1962:
+        type: number
+        example: 2275.9
+      _1963:
+        type: number
+        example: 2275.9
+      _1964:
+        type: number
+        example: 2275.9
+      _1965:
+        type: number
+        example: 2275.9
+      _1966:
+        type: number
+        example: 2275.9
+      _1967:
+        type: number
+        example: 2275.9
+      _1968:
+        type: number
+        example: 2275.9
+      _1969:
+        type: number
+        example: 2275.9
+      _1970:
+        type: number
+        example: 2275.9
+      _1971:
+        type: number
+        example: 2275.9
+      _1972:
+        type: number
+        example: 2275.9
+      _1973:
+        type: number
+        example: 2275.9
+      _1974:
+        type: number
+        example: 2275.9
+      _1975:
+        type: number
+        example: 2275.9
+      _1976:
+        type: number
+        example: 2275.9
+      _1977:
+        type: number
+        example: 2275.9
+      _1978:
+        type: number
+        example: 2275.9
+      _1979:
+        type: number
+        example: 2275.9
+      _1980:
+        type: number
+        example: 2275.9
+      _1981:
+        type: number
+        example: 2275.9
+      _1982:
+        type: number
+        example: 2275.9
+      _1983:
+        type: number
+        example: 2275.9
+      _1984:
+        type: number
+        example: 2275.9
+      _1985:
+        type: number
+        example: 2275.9
+      _1986:
+        type: number
+        example: 2275.9
+      _1987:
+        type: number
+        example: 2275.9
+      _1988:
+        type: number
+        example: 2275.9
+      _1989:
+        type: number
+        example: 2275.9
+      _1990:
+        type: number
+        example: 2275.9
+      _1991:
+        type: number
+        example: 2275.9
+      _1992:
+        type: number
+        example: 2275.9
+      _1993:
+        type: number
+        example: 2275.9
+      _1994:
+        type: number
+        example: 2275.9
+      _1995:
+        type: number
+        example: 2275.9
+      _1996:
+        type: number
+        example: 2275.9
+      _1997:
+        type: number
+        example: 2275.9
+      _1998:
+        type: number
+        example: 2275.9
+      _1999:
+        type: number
+        example: 2275.9
+      _2000:
+        type: number
+        example: 2275.9
+      _2001:
+        type: number
+        example: 2275.9
+      _2002:
+        type: number
+        example: 2275.9
+      _2003:
+        type: number
+        example: 2275.9
+      _2004:
+        type: number
+        example: 2275.9
+      _2005:
+        type: number
+        example: 2275.9
+      _2006:
+        type: number
+        example: 2275.9
+      _2007:
+        type: number
+        example: 2275.9
+      _2008:
+        type: number
+        example: 2275.9
+      _2009:
+        type: number
+        example: 2275.9
+      _2010:
+        type: number
+        example: 2275.9
+      _2011:
+        type: number
+        example: 2275.9
+      _2012:
+        type: number
+        example: 2275.9
+      _2013:
+        type: number
+        example: 2275.9
+      _2014:
+        type: number
+        example: 2275.9
+      _2015:
+        type: number
+        example: 2275.9
+      _2016:
+        type: number
+        example: 2275.9
+      _2017:
+        type: number
+        example: 2275.9
+      _2018:
+        type: number
+        example: 2275.9
+      _2019:
+        type: number
+        example: 2275.9
+      _2020:
+        type: number
+        example: 2275.9
